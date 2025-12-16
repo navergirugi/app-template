@@ -6,6 +6,8 @@
 이 프로젝트를 실행하기 위해 아래 버전 이상의 개발 환경이 필요합니다. 버전이 맞지 않으면 빌드 에러가 발생할 수 있습니다.
 *   **Node.js**: 18.x 이상 (필수)
 *   **Java (JDK)**: 17 버전 (React Native 0.73 이상 필수)
+    *   *설정 위치 1 (VSCode)*: `.vscode/settings.json`의 `java.jdt.ls.java.home`
+    *   *설정 위치 2 (Android Build)*: `android/gradle.properties`의 `org.gradle.java.home` (필요 시 주석 해제하여 사용)
 *   **Ruby**: 2.7.6 이상 (iOS CocoaPods 설치 시 필요)
 *   **React Native**: 0.73.5
 *   **Android Studio**: 최신 버전 권장 (Flamingo 이상)
