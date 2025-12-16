@@ -1,62 +1,54 @@
-# OSX
-#
+# General
+*.log
 .DS_Store
-
-# Xcode
-#
-.xcode.env
-build/
-*.pbxuser
-!default.pbxuser
-*.mode1v3
-!default.mode1v3
-*.mode2v3
-!default.mode2v3
-*.perspectivev3
-!default.perspectivev3
-xcuserdata
-*.xccheckout
-*.moved-aside
-DerivedData
-*.hmap
-*.ipa
-*.xcuserstate
-project.xcworkspace
-Pods/
-
-# Android/IJ
-#
-.idea
+.idea/
+.vscode/
+.vs/
 *.iml
-.gradle
-local.properties
-lib/android/src/main/gen
+*.zip
 
-# node.js
-#
+# React Native
 node_modules/
 npm-debug.log
 yarn-error.log
 package-lock.json
+# Yarn v2
+.yarn/
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
 
-# Rubygem bundles
-#
-bundles/
+# Metro
+.metro/
 
-# VS Code
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
+# Android
+android/app/build/
+android/app/src/main/assets/index.android.bundle
+android/app/src/main/assets/index.android.bundle.meta
+android/build/
+android/.gradle/
+android/local.properties
+android/*.iml
 
-android/gradle
-android/gradlew
-android/gradlew.bat
+# iOS
+ios/*.xcworkspace/
+ios/Pods/
+ios/build/
+ios/DerivedData/
+ios/*.mode1v3
+ios/*.mode2v3
+ios/*.pbuser
+ios/*.perspectivev3
+ios/*.xccheckout
+ios/*.moved-aside
+ios/*.hmap
+ios/*.upa
+ios/Fastlane/
+ios/.xcode.env.local
 
-lib/
-.classpath
-.project
-.settings/
-msbuild.binlog
-example/msbuild.binlog
+# Web
+dist/
+web-build/
+
