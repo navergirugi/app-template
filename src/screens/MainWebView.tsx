@@ -44,9 +44,8 @@ export const MainWebView: React.FC<Props> = ({ url }) => {
     };
 
     const handleMessage = (event: any) => {
-        WebViewBridge.handleMessage(event, {
-            // 필요 시 App 레벨 함수 전달
-        });
+        // webViewRef를 전달하여 브릿지에서 postMessage를 사용할 수 있게 함
+        WebViewBridge.handleMessage(event, webViewRef);
     };
 
     return (
