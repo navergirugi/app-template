@@ -90,3 +90,47 @@ npm run ios
 *   `src/constants/Config.ts`: **설정 파일 (URL, 기능 제어)**
 *   `src/screens/`: 각 화면 컴포넌트
 *   `src/utils/`: 유틸리티 (웹뷰 브릿지 등)
+
+---
+
+## 5. 웹뷰 브릿지 API (WebView Bridge API)
+
+웹(Web)에서 앱(App)의 기능을 호출하거나, 앱에서 웹으로 데이터를 전달할 때 사용하는 인터페이스입니다.
+
+### 5.1. 웹 -> 앱 호출 (Web to App)
+
+웹에서 `window.ReactNativeWebView.postMessage(JSON.stringify(data))`를 통해 호출합니다.
+
+| Command (Type) | Payload | 설명 | 예시 코드 |
+| :--- | :--- | :--- | :--- |
+| `GET_DEVICE_TOKEN` | 없음 | 디바이스 토큰(FCM 등)을 요청합니다. 앱은 `DEVICE_TOKEN` 타입으로 응답합니다. | `window.ReactNativeWebView.postMessage(JSON.stringify({ type: 'GET_DEVICE_TOKEN' }))` |
+| `LOGIN` | `{ token: string }` | 로그인 성공 시 토큰을 앱에 전달합니다. (현재는 로깅 용도) | `window.AppBridge.login('jwt_token')` |
+| `OPEN_BROWSER` | `{ url: string }` | 외부 브라우저(시스템 브라우저)로 URL을 엽니다. | `window.AppBridge.openBrowser('https://google.com')` |
+| `SHARE` | `{ message: string, url: string }` | 시스템 공유하기 창을 띄웁니다. | `window.ReactNativeWebView.postMessage(JSON.stringify({ command: 'SHARE', payload: { message: '공유', url: '...' } }))` |
+| `CONSOLE_LOG` | `{ message: string }` | 앱의 네이티브 로그창에 메시지를 출력합니다. | `window.ReactNativeWebView.postMessage(JSON.stringify({ command: 'CONSOLE_LOG', payload: { message: 'Log' } }))` |
+
+### 5.2. 앱 -> 웹 응답 (App to Web)
+
+앱에서 웹의 `window` 객체에 이벤트를 발생시키거나 메시지를 보냅니다.
+
+| Type | Data | 설명 |
+| :--- | :--- | :--- |
+| `DEVICE_TOKEN` | `{ token: string, deviceType: 'android' \| 'ios' }` | `GET_DEVICE_TOKEN` 요청에 대한 응답입니다. |
+
+**웹에서 응답 받는 방법 (예시):**
+
+```javascript
+// 이벤트 리스너 등록
+const handleMessage = (event) => {
+  const data = JSON.parse(event.data);
+  if (data.type === 'DEVICE_TOKEN') {
+    console.log('Token:', data.token);
+    console.log('Type:', data.deviceType);
+  }
+};
+
+// Android
+window.addEventListener('message', handleMessage);
+// iOS
+document.addEventListener('message', handleMessage);
+```
